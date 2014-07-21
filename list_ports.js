@@ -9,3 +9,5 @@ serialPort.list(function (err, ports) {
     console.log("manufacturer: "+port.manufacturer);
   });
 });
+
+

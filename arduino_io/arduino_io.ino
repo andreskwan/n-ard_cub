@@ -10,7 +10,7 @@ const byte NbSamples = 8;	//Averaging
 int   chartSend = 0; 
 int   blinkRate=0;     // blink rate stored in this variable
 
-const int led = 13;
+const int ledPin = 13;
 
 void setup()
 {
@@ -19,23 +19,37 @@ void setup()
             Serial.println("working"); // wait for serial port to connect. Needed for Leonardo only
         }
         //pin13
-        pinMode(led, OUTPUT);     
+        pinMode(ledPin, OUTPUT);     
 }
 
 void loop()
 {
-        
-        strobe(500);
-        chartSend = Serial.println("{\"p1o\":\"1\", \"p1c\":\"0\", \"p2o\":\" 100 \", \"celsius2\":\" 100 \"}");
-        Serial.println(chartSend);
-        delay(UpdateDelay);
+  if ( Serial.available()) // Check to see if at least one character is available
+  {
+    char ch = Serial.read();
+    if( isDigit(ch) ) // is this an ascii digit between 0 and 9?
+    {
+       blinkRate = (ch - '0');      // ASCII value converted to numeric value
+       blinkRate = blinkRate * 100; // actual rate is 100ms times received digit”       
+    }
+  }
+  blink();
+}
+
+// blink the ledPin with the on and off times determined by blinkRate
+void blink()
+{
+  digitalWrite(ledPin,HIGH);
+  delay(blinkRate); // delay depends on blinkrate value
+  digitalWrite(ledPin,LOW);
+  delay(blinkRate);
 }
 
 void strobe(int lightDelay)
 {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(ledPin, HIGH);   // turn the ledPin on (HIGH is the voltage level)
   delay(lightDelay);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(ledPin, LOW);    // turn the ledPin off by making the voltage LOW
   delay(lightDelay);               // wait for a second
 }
 

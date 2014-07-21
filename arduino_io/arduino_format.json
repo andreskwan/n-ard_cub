@@ -1,5 +1,24 @@
-"{\"adc\":\"" + 100 +
-"\", \"celsius\":\"" + 100 +
-"\", \"adc2\":\"" + 100 +
-"\", \"celsius2\":\"" + 100 +
-"\"}"
+"{\"adc\":\" 100 \", \"celsius\":\" 100 \", \"adc2\":\" 100 \", \"celsius2\":\" 100 \"}"
+
+	float rawADC1 = 0.0;
+	float rawADC2 = 0.0;
+	
+        for (byte i = NbSamples; i > 0; i--)
+	{//Averaging over several readings
+		rawADC1 += analogRead(Temperature1Pin);
+		rawADC2 += analogRead(Temperature2Pin);
+		delay(100);
+	}
+	rawADC1 /= NbSamples;
+	rawADC2 /= NbSamples;
+
+	//Sending a JSON string over Serial/USB like: {"ab":"123","bc":"234","cde":"3546"}
+
+
+
+	Serial.println("{\"adc\":\"" + 100 +
+                "\", \"celsius\":\"" + 100 +
+                   "\", \"adc2\":\"" + 100 +
+               "\", \"celsius2\":\"" + 100 +
+                        "\"}");
+	delay(UpdateDelay);
