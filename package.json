@@ -1,0 +1,29 @@
+{
+  "name": "node-arduino",
+  "version": "0.0.0",
+  "description": "node.js server for arduino - using serial port comunication - socket.io to interact with the arduino - update state in the browser - send orders to the arduino",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreskwan/n-ard_cub.git"
+  },
+  "keywords": [
+    "arduino",
+    "json",
+    "socket.io",
+    "ios",
+    "REST"
+  ],
+  "author": "Andres Kwan O.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreskwan/n-ard_cub/issues"
+  },
+  "homepage": "https://github.com/andreskwan/n-ard_cub",
+  "dependencies": {
+    "serialport": "^1.4.2"
+  }
+}

@@ -1,0 +1,15 @@
+{"adc":" + String((long)round(100.0 * rawADC1)) +",
+ "celsius":" + String((long)round(100.0 * thermistor(rawADC1, Resistance1))) +",
+ "adc2":" + String((long)round(100.0 * rawADC2)) +",
+ "celsius2":" + String((long)round(100.0 * thermistor(rawADC2, Resistance2))) +"
+}
+
+
+{"adc":" 100 ", "celsius":" 100 ", "adc2":" 100 ", "celsius2":" 100 "}
+
+{
+    "adc": " 100 ",
+    "celsius": " 100 ",
+    "adc2": " 100 ",
+    "celsius2": " 100 "
+}

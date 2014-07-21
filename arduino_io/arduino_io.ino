@@ -1,60 +1,37 @@
 #include <math.h>
 
-unsigned long UpdateDelay = 1000UL * 60 * 5;	//Update frequency (5 minutes)
+unsigned long UpdateDelay = 10UL * 60 * 5;	//Update frequency (5 minutes)
 
 const byte Temperature1Pin = 0;	//Thermistor 1 (Outdoor)
 const byte Temperature2Pin = 1;	//Thermistor 2 (Indoor)
 const int Resistance1 = 9900;	//Ohms (measured from R10K of voltage divider 1)
 const int Resistance2 = 9980;	//Ohms (measured from R10K of voltage divider 2)
 const byte NbSamples = 8;	//Averaging
+int   chartSend = 0; 
+int   blinkRate=0;     // blink rate stored in this variable
 
-int led = 13;
+const int led = 13;
 
 void setup()
 {
-  
+	Serial.begin(9600);	//Start serial port
+        while (!Serial) {
+            Serial.println("working"); // wait for serial port to connect. Needed for Leonardo only
+        }
         //pin13
         pinMode(led, OUTPUT);     
-        
-        //example
-	delay(1000);
-	Serial.begin(9600);	//Start serial port
-
-	pinMode(Temperature1Pin, INPUT);
-	pinMode(Temperature2Pin, INPUT);
-	digitalWrite(Temperature1Pin, LOW);
-	digitalWrite(Temperature2Pin, LOW);
-	analogRead(Temperature1Pin);
-	analogRead(Temperature2Pin);
 }
 
 void loop()
 {
-        strove(500);
         
-	float rawADC1 = 0.0;
-	float rawADC2 = 0.0;
-	
-        for (byte i = NbSamples; i > 0; i--)
-	{//Averaging over several readings
-		rawADC1 += analogRead(Temperature1Pin);
-		rawADC2 += analogRead(Temperature2Pin);
-		delay(100);
-	}
-	rawADC1 /= NbSamples;
-	rawADC2 /= NbSamples;
-
-	//Sending a JSON string over Serial/USB like: {"ab":"123","bc":"234","cde":"3546"}
-	Serial.println("{\"adc\":\"" + String((long)round(100.0 * rawADC1)) +
-			"\", \"celsius\":\"" + String((long)round(100.0 * thermistor(rawADC1, Resistance1))) +
-			"\", \"adc2\":\"" + String((long)round(100.0 * rawADC2)) +
-			"\", \"celsius2\":\"" + String((long)round(100.0 * thermistor(rawADC2, Resistance2))) +
-			"\"}");
-
-	delay(UpdateDelay);
+        strobe(500);
+        chartSend = Serial.println("{\"p1o\":\"1\", \"p1c\":\"0\", \"p2o\":\" 100 \", \"celsius2\":\" 100 \"}");
+        Serial.println(chartSend);
+        delay(UpdateDelay);
 }
 
-void strove(int lightDelay)
+void strobe(int lightDelay)
 {
   digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
   delay(lightDelay);               // wait for a second
