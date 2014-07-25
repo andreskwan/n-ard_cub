@@ -7,6 +7,8 @@ var arduinoSP  = "/dev/tty.usbmodem1411";
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
 var serialPort = "";
+var cleanData  = "";
+var spBuffer   = "";
 
 //--------------------------------------------
 //JSON
@@ -56,18 +58,26 @@ var serialportController = function (server){
     console.log('open');
 
     serialPort.on('data', function(data) {
-      jsonDataObj = JSON.parse(data);
-      console.log('validate json schema ' + v.validate(jsonDataObj, spSchema));
-      console.log('JSON.stringify(jsonDataObj)): \n' + JSON.stringify(jsonDataObj));
-      console.log('jsonDataObj.p2c:'+jsonDataObj.p1c);
-      console.log('jsonDataObj.p2o:'+jsonDataObj.p1o);
-      console.log('jsonDataObj.p2c:'+jsonDataObj.p2c);
-      console.log('jsonDataObj.p2o:'+jsonDataObj.p2o);
-      // JSON.parse(jsonDataObj, function (k,v){
-      //   console.log("key: "+k+" value: "+v);
-      //   return v;
-      // });
-      // serialPort.pause();
+    	spBuffer += data.toString();
+    	if(spBuffer.indexOf('B') >= 0 && 
+    		spBuffer.indexOf('A') >=0)
+    		{
+    			cleanData = spBuffer.substring(spBuffer.indexOf('A') + 1,
+    				spBuffer.indexOf('B'));
+    			server.io.emit('message',cleanData);
+    		} 	
+		      jsonDataObj = JSON.parse(data);
+		      console.log('validate json schema ' + v.validate(jsonDataObj, spSchema));
+		      console.log('JSON.stringify(jsonDataObj)): \n' + JSON.stringify(jsonDataObj));
+		      console.log('jsonDataObj.p2c:'+jsonDataObj.p1c);
+		      console.log('jsonDataObj.p2o:'+jsonDataObj.p1o);
+		      console.log('jsonDataObj.p2c:'+jsonDataObj.p2c);
+		      console.log('jsonDataObj.p2o:'+jsonDataObj.p2o);
+		      JSON.parse(jsonDataObj, function (k,v){
+		        console.log("key: "+k+" value: "+v);
+		        return v;
+		      });
+      serialPort.pause();
     });
     
     serialPort.write("1", function(err, results) {
