@@ -31,15 +31,15 @@ var serialportController = function (server){
       // console.log("manufacturer: "+port.manufacturer);
 
       if(port.manufacturer.trim() === "Arduino LLC"){
-        console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
-          var thenum = port.comName.replace(/[^0-9]/g,'');
-          console.log("theNum: "+thenum);
-          console.log("before: "+arduinoSP);
-          // var arraySplited = port.comName.split(".");
-          this.arduinoSP = "/dev/tty.usbmodem"+thenum;
-      //     // console.log("############### "+arraySplited[1]+" ###############");
-          // arduinoSP = port.comName;
-          console.log("after: "+arduinoSP);
+        	console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
+      //     var thenum = port.comName.replace(/[^0-9]/g,'');
+      //     console.log("theNum: "+thenum);
+      //     console.log("before: "+arduinoSP);
+      //     // var arraySplited = port.comName.split(".");
+      //     this.arduinoSP = "/dev/tty.usbmodem"+thenum;
+      // //     // console.log("############### "+arraySplited[1]+" ###############");
+      //     // arduinoSP = port.comName;
+      //     console.log("after: "+arduinoSP);
           
         }else{
           console.log("Arduino - no disponible en -- "+ port.comName);
@@ -59,25 +59,16 @@ var serialportController = function (server){
 
     serialPort.on('data', function(data) {
     	spBuffer += data.toString();
-    	if(spBuffer.indexOf('B') >= 0 && 
-    		spBuffer.indexOf('A') >=0)
+    	console.log(spBuffer);
+    	if(spBuffer.indexOf('}') >= 0 && 
+    		spBuffer.indexOf('{') >=0)
     		{
-    			cleanData = spBuffer.substring(spBuffer.indexOf('A') + 1,
-    				spBuffer.indexOf('B'));
+    			cleanData = spBuffer.substring(spBuffer.indexOf('{') + 1,
+    				spBuffer.indexOf('}'));
+    			console.log("serial port clean data: \n"+ cleanData);
     			server.io.emit('message',cleanData);
     		} 	
-		      jsonDataObj = JSON.parse(data);
-		      console.log('validate json schema ' + v.validate(jsonDataObj, spSchema));
-		      console.log('JSON.stringify(jsonDataObj)): \n' + JSON.stringify(jsonDataObj));
-		      console.log('jsonDataObj.p2c:'+jsonDataObj.p1c);
-		      console.log('jsonDataObj.p2o:'+jsonDataObj.p1o);
-		      console.log('jsonDataObj.p2c:'+jsonDataObj.p2c);
-		      console.log('jsonDataObj.p2o:'+jsonDataObj.p2o);
-		      JSON.parse(jsonDataObj, function (k,v){
-		        console.log("key: "+k+" value: "+v);
-		        return v;
-		      });
-      serialPort.pause();
+      // serialPort.pause();
     });
     
     serialPort.write("1", function(err, results) {
