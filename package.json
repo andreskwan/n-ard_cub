@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/andreskwan/n-ard_cub",
   "dependencies": {
-    "serialport": "^1.4.2"
+    "serialport": "^1.4.2",
+    "jsonschema": "^1.0.0",
+    "socket.io": "^1.0.6",
+    "express.io": "^1.1.13",
+    "swig": "^1.4.1"
   }
 }

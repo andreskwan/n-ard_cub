@@ -8,7 +8,7 @@ const int Resistance1 = 9900;	//Ohms (measured from R10K of voltage divider 1)
 const int Resistance2 = 9980;	//Ohms (measured from R10K of voltage divider 2)
 const byte NbSamples = 8;	//Averaging
 int   chartSend = 0; 
-int   blinkRate=0;     // blink rate stored in this variable
+int   blinkRate = 0;     // blink rate stored in this variable
 
 const int ledPin = 13;
 
@@ -33,7 +33,14 @@ void loop()
        blinkRate = blinkRate * 100; // actual rate is 100ms times received digit”       
     }
   }
-  blink();
+
+        //strobe(500);
+        //should send data every time it has something change or requested 
+        //delay affect all the behavior of the app, is blocking or serial, not allow 
+        chartSend = Serial.println("{\"p1o\":\"1\",\"p1c\":\"0\",\"p2o\":\"100\", \"p2c\":\"100\"}");
+//        Serial.println(chartSend);
+//        delay(UpdateDelay);
+          blink();
 }
 
 // blink the ledPin with the on and off times determined by blinkRate
