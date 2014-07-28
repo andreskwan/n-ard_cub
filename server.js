@@ -28,6 +28,10 @@ server.configure(function() {
 });
 
 //--------------------------------------------
+//load static files
+server.use(express.static('./public'));
+
+//--------------------------------------------
 //sp module
 var serialPortController = require('./app/controllers/serialPort.js');
 serialPortController(server);

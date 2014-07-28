@@ -31,7 +31,8 @@ var serialportController = function (server){
       // console.log("manufacturer: "+port.manufacturer);
 
       if(port.manufacturer.trim() === "Arduino LLC"){
-        	console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
+          console.log("Arduino - Disponible en el puerto -- "+ port.comName);
+          console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
       //     var thenum = port.comName.replace(/[^0-9]/g,'');
       //     console.log("theNum: "+thenum);
       //     console.log("before: "+arduinoSP);
@@ -40,7 +41,8 @@ var serialportController = function (server){
       // //     // console.log("############### "+arraySplited[1]+" ###############");
       //     // arduinoSP = port.comName;
       //     console.log("after: "+arduinoSP);
-          
+
+          // defPorts.resolve(puerto)
         }else{
           console.log("Arduino - no disponible en -- "+ port.comName);
         }
@@ -48,7 +50,8 @@ var serialportController = function (server){
   });
 
   serialPort.open(function (err) {
-    //should not go further if not available 
+    // should not go further if not available 
+    // defPorts.done(funcion ok
     if(err){
       console.log("Error -- Serial port Open event\n"+ err);
       //could validate port here?
@@ -58,24 +61,22 @@ var serialportController = function (server){
     console.log('open');
 
     serialPort.on('data', function(data) {
-    	spBuffer += data.toString();
-    	console.log(spBuffer);
-    	if(spBuffer.indexOf('}') >= 0 && 
-    		spBuffer.indexOf('{') >=0)
-    		{
-    			cleanData = spBuffer.substring(spBuffer.indexOf('{') + 1,
-    				spBuffer.indexOf('}'));
-    			console.log("serial port clean data: \n"+ cleanData);
-    			server.io.emit('message',cleanData);
-    		} 	
-      // serialPort.pause();
-    });
-    
-    serialPort.write("1", function(err, results) {
-      console.log('err ' + err);
-      console.log('results ' + results);
-    });
-
+    	// spBuffer += data.toString();
+      jsonDataObj = JSON.parse(data);
+      if(v.validate(jsonDataObj, spSchema))
+      {
+          console.log('JSON.stringify(jsonDataObj)): \n' + JSON.stringify(jsonDataObj));
+          // console.log('jsonDataObj.p2c:'+jsonDataObj.p1c);
+          
+      }
+    });    
+    // serialPort.write("9", function(err, results) {
+    //   console.log('err ' + err);
+    //   console.log('results ' + results);
+    // });
+  });
+  server.io.route('serialData', function (req) {
+              req.io.emit('hi', { message: 'Hi from server'});
   });
 
 var spSchema = 
@@ -91,6 +92,25 @@ var spSchema =
 };
 
 v.addSchema(spSchema, '/spData');
+
+server.io.route('serial', function (req) {
+  req.io.emit('serialData', jsonDataObj);
+});
+
+var riseSpeedPost = function (req, res){
+  console.log("se oprimio el boton");
+  res.redirect('/');
+  // debugger;
+  serialPort.write(req.body.speed, function (err, results) {
+      if(err){
+        console.log('Serial Port Write error: \n' + err);
+        return;
+      }
+      console.log('results ' + results);
+    });
+}
+
+server.post('/rise_speed', riseSpeedPost);
 
 };
 module.exports = serialportController;
