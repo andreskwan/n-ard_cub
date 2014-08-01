@@ -16,7 +16,7 @@ void setup()
 {
 	Serial.begin(9600);	//Start serial port
         while (!Serial) {
-            Serial.println("working"); // wait for serial port to connect. Needed for Leonardo only
+//            Serial.println("working"); // wait for serial port to connect. Needed for Leonardo only
         }
         //pin13
         pinMode(ledPin, OUTPUT);     
@@ -33,31 +33,34 @@ void loop()
        blinkRate = blinkRate * 100; // actual rate is 100ms times received digit”       
     }
   }
-
         //strobe(500);
         //should send data every time it has something change or requested 
         //delay affect all the behavior of the app, is blocking or serial, not allow 
-        chartSend = Serial.println("{\"p1o\":\"1\",\"p1c\":\"0\",\"p2o\":\"100\", \"p2c\":\"100\"}");
+        //"{\"a\":\"1\",\"b\":\"0\",\"c\":\"1\",\"d\":\"1\"}"
+//        chartSend = Serial.println("{\"a\":\"1\",\"b\":\"0\"}");
+//        Serial.println("{\"a\":\"1\",\"b\":\"0\"}");
+        Serial.println("{\"a\":\"1\",\"b\":\"0\",\"c\":\"1\",\"d\":\"1\"}");
+//        Serial.flush();
 //        Serial.println(chartSend);
 //        delay(UpdateDelay);
-          blink();
+        blink();
 }
 
 // blink the ledPin with the on and off times determined by blinkRate
+//void blink()
+//{
+//  digitalWrite(ledPin,HIGH);
+//  delay(blinkRate); // delay depends on blinkrate value
+//  digitalWrite(ledPin,LOW);
+//  delay(blinkRate);
+//}
+
 void blink()
 {
-  digitalWrite(ledPin,HIGH);
-  delay(blinkRate); // delay depends on blinkrate value
-  digitalWrite(ledPin,LOW);
-  delay(blinkRate);
-}
-
-void strobe(int lightDelay)
-{
   digitalWrite(ledPin, HIGH);   // turn the ledPin on (HIGH is the voltage level)
-  delay(lightDelay);               // wait for a second
+  delay(blinkRate);               // wait for a second
   digitalWrite(ledPin, LOW);    // turn the ledPin off by making the voltage LOW
-  delay(lightDelay);               // wait for a second
+  delay(blinkRate);               // wait for a second
 }
 
 float thermistor(float rawADC, float rSeries)

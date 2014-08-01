@@ -1,3 +1,4 @@
+//cargar el document
 $(document).ready(function () {
 	//connect to the server
 	window.io = io.connect();

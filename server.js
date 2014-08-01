@@ -1,4 +1,42 @@
 //--------------------------------------------
+//Serial Port
+var serialport = require("serialport");
+var SerialPort = serialport.SerialPort;
+var arduinoSP  = "arduion sp not defined";
+//ToDO - distinguish from OS X and linux
+  //require("serialport").list(function (err, ports) {
+    serialport.list(function (err, ports) {
+    //console.log('JSON.stringify(ports)): \n' + JSON.stringify(ports));
+    ports.forEach(function(port) {
+      console.log("--------------------------------------------");
+      // console.log("port name:    "+port.comName);
+      // console.log("pnpId:        "+port.pnpId);
+      // console.log("manufacturer: "+port.manufacturer);
+
+      if(port.manufacturer.trim() === "Arduino LLC"){
+          console.log("Arduino - Disponible en el puerto -- "+ port.comName);
+          console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
+      //     var thenum = port.comName.replace(/[^0-9]/g,'');
+      //     console.log("theNum: "+thenum);
+          console.log("before: "+arduinoSP);
+      //     // var arraySplited = port.comName.split(".");
+      //     this.arduinoSP = "/dev/tty.usbmodem"+thenum;
+      // //     // console.log("############### "+arraySplited[1]+" ###############");
+      	  arduinoSP = port.comName;
+      	  console.log("after: "+arduinoSP);
+          // defPorts.resolve(puerto)
+          //--------------------------------------------
+		//sp module
+		var serialPortController = require('./app/controllers/serialPort.js');
+			console.log("server - arduinoSP: "+arduinoSP);
+			serialPortController(server,serialport,SerialPort,arduinoSP);
+        }else{
+	        console.log("Arduino - no disponible en -- "+ port.comName);
+        }
+    });
+  });
+
+//--------------------------------------------
 //html template
 var swig = require('swig');
 //js array manipulation easy
@@ -31,10 +69,11 @@ server.configure(function() {
 //load static files
 server.use(express.static('./public'));
 
-//--------------------------------------------
-//sp module
-var serialPortController = require('./app/controllers/serialPort.js');
-serialPortController(server);
+// //--------------------------------------------
+// //sp module
+// var serialPortController = require('./app/controllers/serialPort.js');
+// console.log("server - arduinoSP: "+arduinoSP);
+// serialPortController(server,SerialPort,arduinoSP);
 
 //--------------------------------------------
 //server
