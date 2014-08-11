@@ -121,7 +121,21 @@ var riseSpeedPost = function (req, res){
     });
 }
 
-server.post('/rise_speed', riseSpeedPost);
+var riseGetSpeed = function (req, res){
+  console.log("REST");
+  //res.redirect('/');
+  // debugger;
+  serialPort.write(req.params.speed, function (err, results) {
+      if(err){
+        console.log('Serial Port Write error: \n' + err);
+        return;
+      }
+      console.log('results ' + results);
+    });
+}
+
+server.post('/rise_speed',       riseSpeedPost);
+server.get('/rise_speed/:speed', riseGetSpeed);
 
 };
 module.exports = serialportController;
