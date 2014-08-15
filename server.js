@@ -70,17 +70,18 @@ server.configure(function() {
 //load static files
 server.use(express.static('./public'));
 
-// //--------------------------------------------
-// //sp module
-// var serialPortController = require('./app/controllers/serialPort.js');
-// console.log("server - arduinoSP: "+arduinoSP);
-// serialPortController(server,SerialPort,arduinoSP);
 
 //--------------------------------------------
 //server
 server.get('/', function (req, res) {
   res.render('home');
 });
+
+// //--------------------------------------------
+// //sp module
+// var serialPortController = require('./app/controllers/serialPort.js');
+// console.log("server - arduinoSP: "+arduinoSP);
+// serialPortController(server,SerialPort,arduinoSP);
 
 // var io = require('socket.io').listen(8000);
 
