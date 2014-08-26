@@ -29,10 +29,10 @@ var serialportController = function (server,serialport,SerialPort,arduinoSP){
       console.log("Error -- Serial port Open event\n"+ err);
       //could validate port here?
       return;
-    }
+    } 
+
     console.log("############### "+" arduinoSP: "+arduinoSP+" ###############");
     console.log('open');
-
 
     serialPort.on('data', function (data) {
       // console.log('on.data');
@@ -110,7 +110,7 @@ var readSerialData = function (){
 }
 var riseSpeedPost = function (req, res){
   console.log("se oprimio el boton");
-  res.redirect('/');
+  // res.redirect('/');
   // debugger;
   serialPort.write(req.body.speed, function (err, results) {
       if(err){
@@ -131,11 +131,61 @@ var riseGetSpeed = function (req, res){
         return;
       }
       console.log('results ' + results);
-    });
+  });
 }
 
-server.post('/rise_speed',       riseSpeedPost);
+var getServerStatus = function (req, res){
+  //is server listening, on?
+
+  //is serial port working?
+
+  //is arduino connected?
+
+  //this could also turn on arduino
+
+  //should this function splited 
+
+}
+
+//json  define keys and values
+//key open   value 1 yes, 0 no
+//key close
+var postSPOrder = function (req, res) {
+//conditional to identify the order inside the JSON 
+
+}
+
+var updateCubiertaState = function (req, res) {
+  console.log("update cubierta state: "+ req.params.order);
+  switch (req.params.order){
+    case "open":
+        console.log("open cubierta");
+        break;
+    case "close":
+        console.log("close cubierta");
+        break;    
+    default:
+        console.log("not valid command");
+  }     
+  serialPort.write(req.params.speed, function (err, results) {
+          if(err){
+            console.log('Serial Port Write error: \n' + err);
+            return;
+          }
+          console.log('results ' + results);
+        });   
+}
+
+//post    create 
+//get     read   find
+//put     update 
+//delete  delete 
+server.get('/cubierta/',       getServerStatus);
+server.post('/cubierta/',      postSPOrder);
+server.put('/cubierta/:order',  updateCubiertaState);
+
 server.get('/rise_speed/:speed', riseGetSpeed);
+server.post('/rise_speed',       riseSpeedPost);
 
 };
 module.exports = serialportController;

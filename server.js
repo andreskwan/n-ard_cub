@@ -9,12 +9,11 @@ var arduinoSP  = "arduion sp not defined";
     //console.log('JSON.stringify(ports)): \n' + JSON.stringify(ports));
     ports.forEach(function(port) {
       console.log("--------------------------------------------");
-       console.log("port name:    "+port.comName);
-       console.log("pnpId:        "+port.pnpId);
-       console.log("manufacturer: "+port.manufacturer);
+      // console.log("port name:    "+port.comName);
+      // console.log("pnpId:        "+port.pnpId);
+      // console.log("manufacturer: "+port.manufacturer);
 
-      if(port.manufacturer === "Arduino LLC" ||
-         port.pnpId === "usb-Arduino_LLC_Arduino_Leonardo-if00"){
+      if(port.manufacturer.trim() === "Arduino LLC"){
           console.log("Arduino - Disponible en el puerto -- "+ port.comName);
           console.log('JSON.stringify(port)): \n' + JSON.stringify(port));
       //     var thenum = port.comName.replace(/[^0-9]/g,'');
@@ -70,17 +69,18 @@ server.configure(function() {
 //load static files
 server.use(express.static('./public'));
 
-// //--------------------------------------------
-// //sp module
-// var serialPortController = require('./app/controllers/serialPort.js');
-// console.log("server - arduinoSP: "+arduinoSP);
-// serialPortController(server,SerialPort,arduinoSP);
 
 //--------------------------------------------
 //server
 server.get('/', function (req, res) {
   res.render('home');
 });
+
+// //--------------------------------------------
+// //sp module
+// var serialPortController = require('./app/controllers/serialPort.js');
+// console.log("server - arduinoSP: "+arduinoSP);
+// serialPortController(server,SerialPort,arduinoSP);
 
 // var io = require('socket.io').listen(8000);
 
