@@ -55,10 +55,10 @@ var serialportController = function (server,serialport,SerialPort,arduinoSP){
       console.log('pepo');
      // spBuffer += data.toString();
      try{
-      jsonDataObj = JSON.parse(data, function (k, v) {
-          console.log("k",k);
-          console.log("v",v);
-      });
+      // jsonDataObj = JSON.parse(data, function (k, v) {
+      //     console.log("k",k);
+      //     console.log("v",v);
+      // });
       }
       catch(e){
         console.log(e);
