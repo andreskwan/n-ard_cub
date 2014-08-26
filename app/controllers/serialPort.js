@@ -55,10 +55,10 @@ var serialportController = function (server,serialport,SerialPort,arduinoSP){
       console.log('pepo');
      // spBuffer += data.toString();
      try{
-      jsonDataObj = JSON.parse(data, function (k, v) {
-          console.log("k",k);
-          console.log("v",v);
-      });
+      // jsonDataObj = JSON.parse(data, function (k, v) {
+      //     console.log("k",k);
+      //     console.log("v",v);
+      // });
       }
       catch(e){
         console.log(e);
@@ -184,8 +184,8 @@ server.get('/cubierta/',       getServerStatus);
 server.post('/cubierta/',      postSPOrder);
 server.put('/cubierta/:order',  updateCubiertaState);
 
-server.get('/cubierta/:speed', riseGetSpeed);
-server.post('/cubierta',       riseSpeedPost);
+server.get('/rise_speed/:speed', riseGetSpeed);
+server.post('/rise_speed',       riseSpeedPost);
 
 };
 module.exports = serialportController;
