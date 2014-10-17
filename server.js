@@ -1,4 +1,28 @@
 //--------------------------------------------
+//socket.io
+var io = require('socket.io').listen(8000);
+
+io.sockets.on('connection', function (socket) {
+  socket.broadcast.emit('join', socket['id']);
+  console.log(socket['id'] + ' has connected!');
+
+  socket.on('location', function (data){
+    socket.broadcast.emit('update', (socket['id'] + data)); 
+  });
+
+  socket.on('disconnect', function (){
+    socket.broadcast.emit('dissapear', (socket['id'])); 
+    console.log(socket['id'] + ' has disconnected!');
+  });
+
+    // socket.on('message', function (msg) {
+    //     console.log("msg" + msg);
+    //   });
+    // socket.on('disconnect', function () {
+    //     console.log("disconnect");
+    //   });
+});
+
 //Serial Port
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort;
@@ -22,16 +46,16 @@ var arduinoSP  = "arduion sp not defined";
       //     // var arraySplited = port.comName.split(".");
       //     this.arduinoSP = "/dev/tty.usbmodem"+thenum;
       // //     // console.log("############### "+arraySplited[1]+" ###############");
-      	  arduinoSP = port.comName;
-      	  console.log("after: "+arduinoSP);
+          arduinoSP = port.comName;
+          console.log("after: "+arduinoSP);
           // defPorts.resolve(puerto)
           //--------------------------------------------
-		//sp module
-		var serialPortController = require('./app/controllers/serialPort.js');
-			console.log("server - arduinoSP: "+arduinoSP);
-			serialPortController(server,serialport,SerialPort,arduinoSP);
+    //sp module
+    var serialPortController = require('./app/controllers/serialPort.js');
+      console.log("server - arduinoSP: "+arduinoSP);
+      serialPortController(server,serialport,SerialPort,arduinoSP);
         }else{
-	        console.log("Arduino - no disponible en -- "+ port.comName);
+          console.log("Arduino - no disponible en -- "+ port.comName);
         }
     });
   });
@@ -82,16 +106,6 @@ server.get('/', function (req, res) {
 // console.log("server - arduinoSP: "+arduinoSP);
 // serialPortController(server,SerialPort,arduinoSP);
 
-// var io = require('socket.io').listen(8000);
-
-// io.sockets.on('connection', function (socket) {
-//     socket.on('message', function (msg) {
-//         console.log("msg" + msg);
-//       });
-//     socket.on('disconnect', function () {
-//         console.log("disconnect");
-//       });
-// });
 
 server.use(function (req,res) {
     res.render('404', {url:req.url});

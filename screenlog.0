@@ -1,4 +1,63 @@
 node-arduino [[32mmaster[0m [31m*[31m%[0m= 9cf9e15] =>1
 bash: 1: command not found
 node-arduino [[32mmaster[0m [31m*[31m%[0m= 9cf9e15] =>
-node-arduino [[32mmaster[0m [31m*[31m%[0m= 9cf9e15] =>
+node-arduino [[32mmaster[0m [31m*[31m%[0m= 9cf9e15] =>node-arduino [[32mmaster[0m [31m*[0m= defb803] =>[Knode-arduino [[32mmaster[0m [31m*[0m= defb803] =>l
+[H[Jtotal 64
+-rw-r--r--  1 andreskwano  staff    29B Aug 26 13:02 README.md
+drwxr-xr-x  5 andreskwano  staff   170B Jul 26 11:39 [1m[36mapp[39;49m[0m
+-rw-r--r--  1 andreskwano  staff   4.4K Jul 16 17:17 app.js
+drwxr-xr-x  5 andreskwano  staff   170B Aug 26 12:00 [1m[36marduino_io[39;49m[0m
+-rwxr-xr-x@ 1 andreskwano  staff   2.2K May 22  2012 [1m[31mindex.html[39;49m[0m
+-rw-r--r--  1 andreskwano  staff   383B Jul 21 13:33 list_ports.js
+drwxr-xr-x  8 andreskwano  staff   272B Jul 25 12:35 [1m[36mnode_modules[39;49m[0m
+-rw-r--r--  1 andreskwano  staff   860B Jul 25 12:35 package.json
+drwxr-xr-x  4 andreskwano  staff   136B Jul 27 21:44 [1m[36mpublic[39;49m[0m
+-rw-r--r--  1 andreskwano  staff   263B Aug 29 16:54 screenlog.0
+-rw-r--r--  1 andreskwano  staff   3.2K Aug 26 12:00 server.js
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>los server.js
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>[H[Jnode-arduino [[32mmaster[0m [31m*[0m= defb803] =>node server.js 
+connect.multipart() will be removed in connect 3.0
+visit https://github.com/senchalabs/connect/wiki/Connect-3.0 for alternatives
+connect.limit() will be removed in connect 3.0
+--------------------------------------------
+Arduino - no disponible en -- /dev/cu.Bluetooth-Incoming-Port
+--------------------------------------------
+Arduino - no disponible en -- /dev/cu.Bluetooth-Modem
+^Cnode-arduino [[32mmaster[0m [31m*[0m= defb803] =>
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>[H[Jnode-arduino [[32mmaster[0m [31m*[0m= defb803] =>[H[Jnode-arduino [[32mmaster[0m [31m*[0m= defb803] =>df
+Filesystem      Size   Used  Avail Capacity   iused    ifree %iused  Mounted on
+/dev/disk0s2   238Gi  152Gi   86Gi    64%  39875289 22429581   64%   /
+devfs          202Ki  202Ki    0Bi   100%       700        0  100%   /dev
+/dev/disk1s2   465Gi  446Gi   19Gi    96% 116839383  5047359   96%   /Volumes/HDD_Macintosh
+map -hosts       0Bi    0Bi    0Bi   100%         0        0  100%   /net
+map auto_home    0Bi    0Bi    0Bi   100%         0        0  100%   /home
+/dev/disk3s2   931Gi  897Gi   34Gi    97% 235255799  8850867   96%   /Volumes/HDD Kwan Mac 
+/dev/disk2s1   931Gi  124Gi  807Gi    14%         0        0  100%   /Volumes/TIMEMACHINE
+/dev/disk4s1    56Mi  9.5Mi   46Mi    17%       512        0  100%   /Volumes/boot
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>[13P(reverse-i-search)`': d': dfi': mkdir node-pro-m.las': sudo dcfldd if=r-pi-8-23-14-autorestart-ext-ip.img of=/dev/disk1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@k[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[32Pu': diskutil unmountDisk /dev/disk1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@t[C[C[C[1@i[C[C[C[1@l[C[C[C[1@ [C[C[C[17Pl': diskutil list[3@node-arduino [[32mmaster[0m [31m*[0m= defb803] =>
+/dev/disk0
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *256.1 GB   disk0
+   1:                        EFI EFI                     209.7 MB   disk0s1
+   2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
+   3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
+/dev/disk1
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *500.1 GB   disk1
+   1:                        EFI EFI                     209.7 MB   disk1s1
+   2:                  Apple_HFS HDD_Macintosh           499.2 GB   disk1s2
+/dev/disk2
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *1.0 TB     disk2
+   1:                 DOS_FAT_32 TIMEMACHINE             1.0 TB     disk2s1
+/dev/disk3
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *1.0 TB     disk3
+   1:                        EFI EFI                     209.7 MB   disk3s1
+   2:                  Apple_HFS HDD Kwan Mac            999.9 GB   disk3s2
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>
+node-arduino [[32mmaster[0m [31m*[0m= defb803] =>[H[Jnode-arduino [[32mmaster[0m [31m*[0m= defb803] =>[Knode-arduino [[32mmaster[0m [31m*[0m= defb803] =>                                                                               
+*** FINAL System shutdown message from nobody@Andress-MacBook-Pro-4.local ***
+System going down IMMEDIATELY                                                  
+                                                                               
+                                                                               
